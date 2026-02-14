@@ -1,0 +1,5 @@
+{
+  "name": "APK Builder Web Interface",
+  "description": "A professional web-based tool to trigger GitHub Actions for building native Android APKs from web URLs using the apk-builder-cli ecosystem.",
+  "requestFramePermissions": []
+}

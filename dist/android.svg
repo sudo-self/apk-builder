@@ -1,0 +1,99 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="512" height="512">
+  <defs>
+    <!-- Drop Shadow Filter for depth -->
+    <filter id="paperShadow" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur in="SourceAlpha" stdDeviation="4" result="blur"/>
+      <feOffset in="blur" dx="0" dy="4" result="offsetBlur"/>
+      <feComponentTransfer>
+        <feFuncA type="linear" slope="0.3"/>
+      </feComponentTransfer>
+      <feMerge>
+        <feMergeNode in="offsetBlur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+
+    <!-- Gradients for folded paper effect -->
+    <linearGradient id="gradLeft" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#3DDC84"/>
+      <stop offset="100%" stop-color="#35C776"/>
+    </linearGradient>
+    
+    <linearGradient id="gradRight" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#2B9E5E"/>
+      <stop offset="100%" stop-color="#22804C"/>
+    </linearGradient>
+
+    <linearGradient id="gradArmLeft" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#4CE38F"/>
+      <stop offset="100%" stop-color="#3DDC84"/>
+    </linearGradient>
+
+    <linearGradient id="gradArmRight" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#268F55"/>
+      <stop offset="100%" stop-color="#1E7344"/>
+    </linearGradient>
+    
+    <linearGradient id="gradAntennaLeft" x1="0%" y1="100%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#3DDC84"/>
+      <stop offset="100%" stop-color="#66EBA3"/>
+    </linearGradient>
+
+    <linearGradient id="gradAntennaRight" x1="0%" y1="100%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#22804C"/>
+      <stop offset="100%" stop-color="#1B663D"/>
+    </linearGradient>
+  </defs>
+
+  <g filter="url(#paperShadow)">
+    
+    <!-- Left Leg -->
+    <path d="M190 380 L230 380 L230 440 L210 455 L190 440 Z" fill="url(#gradLeft)" stroke="#2EAA68" stroke-width="0.5"/>
+    
+    <!-- Right Leg -->
+    <path d="M282 380 L322 380 L322 440 L302 455 L282 440 Z" fill="url(#gradRight)" stroke="#1E7344" stroke-width="0.5"/>
+
+    <!-- Left Arm -->
+    <path d="M115 210 L155 210 L155 320 L135 340 L115 320 Z" fill="url(#gradArmLeft)"/>
+
+    <!-- Right Arm -->
+    <path d="M357 210 L397 210 L397 320 L377 340 L357 320 Z" fill="url(#gradArmRight)"/>
+
+    <!-- Body Group -->
+    <g>
+      <!-- Left Body Panel -->
+      <path d="M165 200 L256 200 L256 380 L185 380 L165 360 Z" fill="url(#gradLeft)"/>
+      
+      <!-- Right Body Panel -->
+      <path d="M256 200 L347 200 L347 360 L327 380 L256 380 Z" fill="url(#gradRight)"/>
+      
+      <!-- Center Crease Highlight -->
+      <line x1="256" y1="200" x2="256" y2="380" stroke="rgba(255,255,255,0.2)" stroke-width="1"/>
+    </g>
+
+    <!-- Head Shadow on Body -->
+    <path d="M165 200 L347 200 L347 215 L256 225 L165 215 Z" fill="#000" opacity="0.15"/>
+
+    <!-- Head Group -->
+    <g transform="translate(0, -10)">
+      <!-- Left Antenna -->
+      <path d="M195 105 L180 65 L190 60 L208 95 Z" fill="url(#gradAntennaLeft)"/>
+      
+      <!-- Right Antenna -->
+      <path d="M317 105 L332 65 L322 60 L304 95 Z" fill="url(#gradAntennaRight)"/>
+
+      <!-- Left Head Panel -->
+      <path d="M165 190 L256 190 L256 100 L200 100 L165 135 Z" fill="url(#gradLeft)"/>
+      
+      <!-- Right Head Panel -->
+      <path d="M256 190 L347 190 L347 135 L312 100 L256 100 Z" fill="url(#gradRight)"/>
+
+      <!-- Center Crease Highlight Head -->
+      <line x1="256" y1="100" x2="256" y2="190" stroke="rgba(255,255,255,0.2)" stroke-width="1"/>
+
+      <!-- Eyes -->
+      <circle cx="205" cy="145" r="9" fill="#FFFFFF" fill-opacity="0.9"/>
+      <circle cx="307" cy="145" r="9" fill="#FFFFFF" fill-opacity="0.9"/>
+    </g>
+  </g>
+</svg>
