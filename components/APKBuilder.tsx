@@ -33,7 +33,11 @@ export const APKBuilder: React.FC<APKBuilderProps> = ({ setView }) => {
   const getSafeHost = (inputUrl: string) => {
     try {
       const domain = new URL(inputUrl).hostname;
-      return domain.replace(/[^a-zA-Z0-9]/g, "");
+      const sanitizedDomain = domain.replace(/[^a-zA-Z0-9]/g, "");
+      if (sanitizedDomain.toLowerCase() === "null" || sanitizedDomain.length === 0) {
+        return "app" + Date.now().toString().slice(-4);
+      }
+      return sanitizedDomain;
     } catch {
       return "app" + Date.now().toString().slice(-4);
     }
@@ -102,7 +106,7 @@ export const APKBuilder: React.FC<APKBuilderProps> = ({ setView }) => {
             setRunStatus("finalizing build...");
             
             let artifactAttempts = 0;
-            const maxArtifactAttempts = 15;
+            const maxArtifactAttempts = 30;
             artifactPollingInterval.current = setInterval(async () => {
               if (artifactAttempts >= maxArtifactAttempts) {
                 clearInterval(artifactPollingInterval.current);
@@ -150,6 +154,12 @@ export const APKBuilder: React.FC<APKBuilderProps> = ({ setView }) => {
 
   const handleDownload = async () => {
     if (!artifactUrl) return;
+
+    if (artifactUrl.includes('github.com/sudo-self/apk-builder-actions/actions/runs')) {
+      window.open(artifactUrl, '_blank');
+      return;
+    }
+
     setIsDownloading(true);
     try {
       const res = await fetch(artifactUrl, {
