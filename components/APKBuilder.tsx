@@ -394,32 +394,24 @@ export const APKBuilder: React.FC<APKBuilderProps> = ({ setView }) => {
                     </div>
                   </div>
                 ) : (
-                  <div className="flex h-full flex-col items-center justify-center p-12 text-center bg-gradient-to-b from-zinc-50 to-white dark:from-zinc-900 dark:to-zinc-950">
-                    <div className="relative mb-12">
-                      <div className="absolute inset-0.5 rounded-full bg-gradient-to-tr from-emerald-500 to-blue-500 opacity-20 blur-2xl" />
-                      <img
-                        src={isValidUrl ? `https://favicon.splitbee.io/?url=${url}` : "/icon.svg"}
-                        className="w-32 h-32 rounded-full relative z-10 shadow-lg"
-                        alt="App Icon Preview"
-                        onError={(e) => (e.currentTarget.src = "/icon.svg")}
-                      />
-                    </div>
-                    <div className="space-y-2">
-                      <h3 className="text-3xl font-extrabold tracking-tight text-zinc-900 dark:text-zinc-50">
-                        {appName || "App Name"}
-                      </h3>
+                  isValidUrl ? (
+                    <iframe
+                      src={url}
+                      className="w-full h-full border-0"
+                      title="Website Preview"
+                      sandbox="allow-scripts allow-same-origin"
+                    />
+                  ) : (
+                    <div className="flex h-full flex-col items-center justify-center p-8 text-center bg-zinc-50 dark:bg-zinc-900">
+                      <img src="/icon.svg" className="w-16 h-16 mb-4 opacity-30" alt="Icon" />
                       <p className="text-zinc-400 text-sm">
-                        {(() => {
-                          if (!isValidUrl) return "your-domain.com";
-                          try {
-                            return new URL(url).hostname;
-                          } catch (e) {
-                            return "your-domain.com";
-                          }
-                        })()}
+                        Enter a valid URL to see a live preview of your web app.
+                      </p>
+                      <p className="mt-4 text-xs text-zinc-400/80">
+                        Note: Some websites may not be available for preview.
                       </p>
                     </div>
-                  </div>
+                  )
                 )}
               </div>
             </div>
