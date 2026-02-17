@@ -2,7 +2,7 @@ import React from 'react';
 
 export const Footer: React.FC = () => {
   return (
-    <footer className="relative w-full overflow-hidden bg-[#050505] pt-20 pb-10 font-sans selection:bg-orange-500/30 transition-all duration-300 hover:bg-zinc-900">
+    <footer className="relative w-full overflow-hidden bg-[#050505] pt-20 pb-10 font-sans selection:bg-orange-500/30 transition-all duration-300">
       {/* Tectonic Plate Layering - Background Elements */}
       <div className="absolute inset-0 z-0">
         <div className="absolute top-0 left-0 h-px w-full bg-gradient-to-r from-transparent via-zinc-700 to-transparent opacity-50" />
@@ -105,7 +105,7 @@ export const Footer: React.FC = () => {
               <div key={i} className="h-1 w-1 rounded-full bg-zinc-800" />
             ))}
           </div>
-          <span className="text-[9px] font-medium tracking-[0.3em] text-zinc-700 uppercase">
+          <span className="text-[9px] font-medium tracking-[0.3em] text-zinc-700 uppercase transition-colors duration-200 hover:text-orange-500">
             © 2024 apk.jessejesse.com
           </span>
           <div className="flex gap-1">
