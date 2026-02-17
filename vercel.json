@@ -1,19 +1,19 @@
 {
   "functions": {
     "api/build.ts": {
-      "runtime": "nodejs18.x"
+      "runtime": "@vercel/node@2.x"
     },
     "api/status.ts": {
-      "runtime": "nodejs18.x"
+      "runtime": "@vercel/node@2.x"
     },
     "api/artifacts.ts": {
-      "runtime": "nodejs18.x"
+      "runtime": "@vercel/node@2.x"
     },
     "api/runs.ts": {
-      "runtime": "nodejs18.x"
+      "runtime": "@vercel/node@2.x"
     },
     "api/download.ts": {
-      "runtime": "nodejs18.x"
+      "runtime": "@vercel/node@2.x"
     }
   },
   "rewrites": [
