@@ -103,13 +103,13 @@ export const Header: React.FC<HeaderProps> = ({ currentView, onViewChange }) => 
                 active={currentView === 'home'}
                 onClick={() => onViewChange('home')}
               >
-                TERMINAL
+                HOME
               </TactileButton>
               <TactileButton
                 active={currentView === 'docs'}
                 onClick={() => onViewChange('docs')}
               >
-                ARCHIVE
+                DOCS
               </TactileButton>
             </div>
 
