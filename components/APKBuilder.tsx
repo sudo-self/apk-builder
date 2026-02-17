@@ -59,12 +59,7 @@ export const APKBuilder: React.FC<APKBuilderProps> = ({ setView }) => {
       attempts++;
       try {
         if (!runId) {
-          const res = await fetch(`https://api.github.com/repos/sudo-self/apk-builder-actions/actions/runs?event=repository_dispatch&per_page=5`, {
-            headers: { 
-              'Authorization': `Bearer ${GITHUB_TOKEN}`,
-              'Accept': 'application/vnd.github+json'
-            }
-          });
+          const res = await fetch(`/api/runs`);
           const data = await res.json();
           const latestRun = data.workflow_runs?.find((run: any) => 
             new Date(run.created_at).getTime() >= startTime - 15000 
@@ -80,12 +75,7 @@ export const APKBuilder: React.FC<APKBuilderProps> = ({ setView }) => {
           return;
         }
 
-        const res = await fetch(`https://api.github.com/repos/sudo-self/apk-builder-actions/actions/runs/${runId}`, {
-          headers: { 
-            'Authorization': `Bearer ${GITHUB_TOKEN}`,
-            'Accept': 'application/vnd.github+json'
-          }
-        });
+        const res = await fetch(`/api/status?runId=${runId}`);
         const runData = await res.json();
         setRunStatus(runData.status);
 
@@ -108,12 +98,7 @@ export const APKBuilder: React.FC<APKBuilderProps> = ({ setView }) => {
               artifactAttempts++;
 
               try {
-                const artifactRes = await fetch(`https://api.github.com/repos/sudo-self/apk-builder-actions/actions/runs/${runId}/artifacts`, {
-                    headers: { 
-                        'Authorization': `Bearer ${GITHUB_TOKEN}`,
-                        'Accept': 'application/vnd.github+json'
-                    }
-                });
+                const artifactRes = await fetch(`/api/artifacts?runId=${runId}`);
                 const artifactData = await artifactRes.json();
                 
                 let targetArtifact = null;
@@ -146,42 +131,27 @@ export const APKBuilder: React.FC<APKBuilderProps> = ({ setView }) => {
     }, 5000);
   };
 
-  const [isDownloading, setIsDownloading] = useState(false);
-
-  const handleDownload = async () => {
-    if (!artifactUrl) return;
-
-    if (artifactUrl.includes('github.com/sudo-self/apk-builder-actions/actions/runs')) {
-      window.open(artifactUrl, '_blank');
-      return;
-    }
-
-    setIsDownloading(true);
-    try {
-      const res = await fetch(artifactUrl, {
-        headers: {
-          'Authorization': `Bearer ${GITHUB_TOKEN}`,
-          'Accept': 'application/vnd.github+json'
+    const [isDownloading, setIsDownloading] = useState(false);
+  
+    const handleDownload = async () => {
+      if (!artifactUrl) return;
+      setIsDownloading(true);
+  
+      try {
+        if (artifactUrl.includes('github.com/sudo-self/apk-builder-actions/actions/runs')) {
+          window.open(artifactUrl, '_blank');
+        } else {
+          // Use the new secure download endpoint
+          window.location.href = `/api/download?url=${encodeURIComponent(artifactUrl)}`;
         }
-      });
-      // GitHub API redirects to the actual download URL. The browser will follow the redirect.
-      const blob = await res.blob();
-      const url = window.URL.createObjectURL(blob);
-      const a = document.createElement('a');
-      a.href = url;
-      a.download = `${appName}-app.zip`;
-      document.body.appendChild(a);
-      a.click();
-      a.remove();
-      window.URL.revokeObjectURL(url);
-    } catch (error) {
-      console.error("Download failed:", error);
-      alert("An error occurred while downloading the artifact. Please try again from the GitHub Actions page.");
-    } finally {
-      setIsDownloading(false);
-    }
-  };
-
+      } catch (error) {
+        console.error("Download failed:", error);
+        alert("An error occurred while downloading the artifact. Please try again from the GitHub Actions page.");
+      } finally {
+        // Add a delay to give the download time to start
+        setTimeout(() => setIsDownloading(false), 3000);
+      }
+    };
   const triggerBuild = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!url || !appName) return;
