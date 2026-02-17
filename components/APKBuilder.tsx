@@ -149,12 +149,8 @@ export const APKBuilder: React.FC<APKBuilderProps> = ({ setView }) => {
       setIsDownloading(true);
   
       try {
-        if (artifactUrl.includes('github.com/sudo-self/apk-builder-actions/actions/runs')) {
-          window.open(artifactUrl, '_blank');
-        } else {
-          // Use the new secure download endpoint
-          window.location.href = `/api/download?url=${encodeURIComponent(artifactUrl)}`;
-        }
+        // Always use the secure download endpoint
+        window.location.href = `/api/download?url=${encodeURIComponent(artifactUrl)}`;
       } catch (error) {
         console.error("Download failed:", error);
         alert("An error occurred while downloading the artifact. Please try again from the GitHub Actions page.");
