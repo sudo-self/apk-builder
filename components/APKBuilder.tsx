@@ -393,3 +393,12 @@ export const APKBuilder: React.FC<APKBuilderProps> = ({ setView }) => {
                       <p className="mt-4 text-[10px] text-zinc-400 font-bold uppercase tracking-[0.2em] text-center">Certified & Signed APK</p>
                     </div>
                   </div>
+                ) : null}
+              </div>
+            </div>
+          </div>
+        </section>
+      </div>
+    </div>
+  );
+};
