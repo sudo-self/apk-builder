@@ -85,12 +85,12 @@ export const Header: React.FC<HeaderProps> = ({ currentView, onViewChange }) => 
                 className="group flex flex-col items-start"
               >
                 <span className="text-xs font-mono text-amber-500/80 tracking-widest leading-none mb-1 opacity-0 group-hover:opacity-100 transition-opacity">
-                  SYSTEM.READY
+                  workflow.ready
                 </span>
                 <span className="text-xl font-black tracking-tighter text-zinc-900 dark:text-white flex items-baseline gap-1">
                   APK
                   <span className="w-1 h-1 bg-zinc-400 dark:bg-zinc-600 rounded-full" />
-                  <span className="text-zinc-500 dark:text-zinc-500 font-light italic">BUILDER</span>
+                  <span className="text-zinc-500 dark:text-zinc-500 font-light italic">jessejesse.com</span>
                 </span>
               </button>
             </div>
