@@ -9,6 +9,9 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
     return res.status(500).json({ message: 'GitHub token is not configured' });
   }
 
+  // Disable caching to ensure fresh data is always fetched
+  res.setHeader('Cache-Control', 'no-cache, max-age=0');
+
   if (!runId) {
     return res.status(400).json({ message: 'Missing runId parameter' });
   }
