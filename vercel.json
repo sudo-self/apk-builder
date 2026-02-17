@@ -1,21 +1,4 @@
 {
-  "functions": {
-    "api/build.ts": {
-      "runtime": "@vercel/node@2.x"
-    },
-    "api/status.ts": {
-      "runtime": "@vercel/node@2.x"
-    },
-    "api/artifacts.ts": {
-      "runtime": "@vercel/node@2.x"
-    },
-    "api/runs.ts": {
-      "runtime": "@vercel/node@2.x"
-    },
-    "api/download.ts": {
-      "runtime": "@vercel/node@2.x"
-    }
-  },
   "rewrites": [
     {
       "source": "/api/(.*)",
