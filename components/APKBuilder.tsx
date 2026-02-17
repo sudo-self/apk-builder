@@ -18,8 +18,6 @@ export const APKBuilder: React.FC<APKBuilderProps> = ({ setView }) => {
   const pollingInterval = useRef<any>(null);
   const artifactPollingInterval = useRef<any>(null);
 
-  const GITHUB_TOKEN = import.meta.env.VITE_GITHUB_TOKEN || "";
-
   const isValidUrl = url.startsWith("http://") || url.startsWith("https://");
 
   const getSafeHost = (inputUrl: string) => {
@@ -199,26 +197,20 @@ export const APKBuilder: React.FC<APKBuilderProps> = ({ setView }) => {
     const safeHost = getSafeHost(url);
     
     try {
-      const response = await fetch(`https://api.github.com/repos/sudo-self/apk-builder-actions/dispatches`, {
+      const response = await fetch(`/api/build`, {
         method: 'POST',
         headers: {
-          'Authorization': `Bearer ${GITHUB_TOKEN}`,
-          'Accept': 'application/vnd.github+json',
           'Content-Type': 'application/json',
-          'X-GitHub-Api-Version': '2022-11-28'
         },
         body: JSON.stringify({
-          event_type: 'apk_build',
-          client_payload: {
-            buildConfig: {
-              buildId: `web-${triggerTime}`,
-              hostName: safeHost,
-              name: appName,
-              launchUrl: url,
-              launcherName: appName,
-              themeColor: "#2196F3",
-              iconChoice: "phone"
-            }
+          buildConfig: {
+            buildId: `web-${triggerTime}`,
+            hostName: safeHost,
+            name: appName,
+            launchUrl: url,
+            launcherName: appName,
+            themeColor: "#2196F3",
+            iconChoice: "phone"
           }
         })
       });
