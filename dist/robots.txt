@@ -1,3 +1,0 @@
-User-agent: *
-Allow: /
-Sitemap: https://apk.jessejesse.com/sitemap.xml

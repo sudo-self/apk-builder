@@ -181,10 +181,6 @@ export const APKBuilder: React.FC<APKBuilderProps> = ({ setView }) => {
   const triggerBuild = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!url || !appName) return;
-    if (!GITHUB_TOKEN) {
-      alert("Missing GITHUB_TOKEN.");
-      return;
-    }
 
     setStatus(BuildStatus.LOADING);
     setArtifactUrl(null);
@@ -194,8 +190,6 @@ export const APKBuilder: React.FC<APKBuilderProps> = ({ setView }) => {
     const triggerTime = Date.now();
     const safeHost = getSafeHost(url);
     
-    console.log("Using GITHUB_TOKEN:", GITHUB_TOKEN ? "Token Loaded" : "Token Not Loaded");
-
     try {
       const response = await fetch(`https://api.github.com/repos/sudo-self/apk-builder-actions/dispatches`, {
         method: 'POST',
