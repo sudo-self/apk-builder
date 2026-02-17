@@ -117,7 +117,13 @@ export const APKBuilder: React.FC<APKBuilderProps> = ({ setView }) => {
                     }
                 });
                 const artifactData = await artifactRes.json();
-                const targetArtifact = artifactData.artifacts?.find((art: any) => art.name === `${appName}-app`);
+                
+                let targetArtifact = null;
+                if (artifactData.artifacts?.length === 1) {
+                  targetArtifact = artifactData.artifacts[0];
+                } else {
+                  targetArtifact = artifactData.artifacts?.find((art: any) => art.name === `${appName}-app`);
+                }
 
                 if (targetArtifact) {
                     clearInterval(artifactPollingInterval.current);
@@ -181,6 +187,8 @@ export const APKBuilder: React.FC<APKBuilderProps> = ({ setView }) => {
   const triggerBuild = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!url || !appName) return;
+
+    console.log("VITE_GITHUB_TOKEN value:", import.meta.env.VITE_GITHUB_TOKEN);
 
     setStatus(BuildStatus.LOADING);
     setArtifactUrl(null);
