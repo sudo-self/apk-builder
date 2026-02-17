@@ -409,7 +409,14 @@ export const APKBuilder: React.FC<APKBuilderProps> = ({ setView }) => {
                         {appName || "App Name"}
                       </h3>
                       <p className="text-zinc-400 text-sm">
-                        {isValidUrl ? new URL(url).hostname : "your-domain.com"}
+                        {(() => {
+                          if (!isValidUrl) return "your-domain.com";
+                          try {
+                            return new URL(url).hostname;
+                          } catch (e) {
+                            return "your-domain.com";
+                          }
+                        })()}
                       </p>
                     </div>
                   </div>
