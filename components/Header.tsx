@@ -98,7 +98,7 @@ export const Header: React.FC<HeaderProps> = ({ currentView, onViewChange }) => 
 
           {/* Navigation Strata */}
           <div className="flex items-center gap-2">
-            <div className="hidden sm:flex items-center gap-1 mr-4 border-l border-zinc-200 dark:border-zinc-800 pl-4">
+            <div className="flex items-center gap-1 mr-4 border-l border-zinc-200 dark:border-zinc-800 pl-4">
               <TactileButton
                 active={currentView === 'home'}
                 onClick={() => onViewChange('home')}
