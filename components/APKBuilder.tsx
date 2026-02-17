@@ -101,23 +101,8 @@ export const APKBuilder: React.FC<APKBuilderProps> = ({ setView }) => {
                 const artifactRes = await fetch(`/api/artifacts?runId=${runId}`);
                 const artifactData = await artifactRes.json();
                 
-                let targetArtifact = null;
-                const artifacts = artifactData.artifacts || [];
-
-                if (artifacts.length > 0) {
-                  // 1. Try to find an exact match first
-                  targetArtifact = artifacts.find((art: any) => art.name === `${appName}-app`);
-
-                  // 2. If no exact match, try to find a partial match
-                  if (!targetArtifact) {
-                    targetArtifact = artifacts.find((art: any) => art.name.includes(appName));
-                  }
-
-                  // 3. If still no match and there's only one artifact, use that one
-                  if (!targetArtifact && artifacts.length === 1) {
-                    targetArtifact = artifacts[0];
-                  }
-                }
+                // Find the first artifact that is an APK file.
+                const targetArtifact = artifacts.find((art: any) => art.name.endsWith('.apk') || (art.archive_download_url && art.archive_download_url.endsWith('.zip')));
 
                 if (targetArtifact) {
                     clearInterval(artifactPollingInterval.current);
