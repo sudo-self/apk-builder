@@ -384,12 +384,12 @@ export const APKBuilder: React.FC<APKBuilderProps> = ({ setView }) => {
                     />
                   ) : (
                     <div className="flex h-full flex-col items-center justify-center p-8 text-center bg-zinc-50 dark:bg-zinc-900">
-                      <img src="/icon.svg" className="w-16 h-16 mb-4 opacity-30" alt="Icon" />
-                      <p className="text-zinc-400 text-sm">
-                        Enter URL to preview your web app.
+                      <img src="/icon.svg" className="w-20 h-20 mb-4 opacity-30" alt="Icon" />
+                      <p className="text-emerald-600 text-sm">
+                        Enter URL to preview your APP
                       </p>
                       <p className="mt-4 text-xs text-zinc-400/80">
-                        * some URLs not available for preview
+                        URL may not be available for preview
                       </p>
                     </div>
                   )
