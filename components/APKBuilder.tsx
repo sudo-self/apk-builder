@@ -397,10 +397,10 @@ export const APKBuilder: React.FC<APKBuilderProps> = ({ setView }) => {
                   <div className="flex h-full flex-col items-center justify-center p-12 text-center bg-gradient-to-b from-zinc-50 to-white dark:from-zinc-900 dark:to-zinc-950">
                     <div className="relative mb-12">
                       <div className="absolute inset-0.5 rounded-full bg-gradient-to-tr from-emerald-500 to-blue-500 opacity-20 blur-2xl" />
-                      <img 
-                        src="/icon.svg"
-                        className="w-32 h-32 rounded-full relative z-10 shadow-lg" 
-                        alt="App Icon Preview" 
+                      <img
+                        src={isValidUrl ? `https://favicon.splitbee.io/?url=${url}` : "/icon.svg"}
+                        className="w-32 h-32 rounded-full relative z-10 shadow-lg"
+                        alt="App Icon Preview"
                         onError={(e) => (e.currentTarget.src = "/icon.svg")}
                       />
                     </div>
