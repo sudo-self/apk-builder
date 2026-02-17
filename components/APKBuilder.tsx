@@ -390,65 +390,6 @@ export const APKBuilder: React.FC<APKBuilderProps> = ({ setView }) => {
                       >
                         {isDownloading ? "Downloading..." : `${appName.replace(/\s+/g, '-')}.apk`}
                       </button>
+                      <p className="mt-4 text-[10px] text-zinc-400 font-bold uppercase tracking-[0.2em] text-center">Certified & Signed APK</p>
                     </div>
                   </div>
-                ) : isValidUrl && status === BuildStatus.IDLE ? (
-                  <iframe 
-                    src={url} 
-                    className="h-full w-full border-none pt-8 transition-all" 
-                    title="Live Preview" 
-                    sandbox="allow-scripts allow-same-origin"
-                  />
-                ) : (
-                  <div className="flex h-full flex-col items-center justify-center p-12 text-center bg-gradient-to-b from-zinc-50 to-white dark:from-zinc-900 dark:to-zinc-950">
-                    <div className={`relative mb-12 transition-all duration-1000 ${status !== BuildStatus.IDLE ? "scale-110" : "scale-100"}`}>
-                      {status !== BuildStatus.IDLE && (
-                         <div className="absolute inset-0 scale-150 rounded-full border border-emerald-500/10 animate-ping" />
-                      )}
-                      <img 
-                        src="/android.svg" 
-                        className="w-32 h-32 relative z-10" 
-                        alt="Android Logo" 
-                      />
-                    </div>
-                    
-                    <div className="space-y-4">
-                      <h3 className="text-3xl font-extrabold tracking-tight text-zinc-900 dark:text-zinc-50">
-                        {appName || "App Name"}
-                      </h3>
-                      {status === BuildStatus.MONITORING && (
-                        <div className="flex flex-col items-center gap-2">
-                          <p className="text-xs text-zinc-500 font-medium animate-pulse capitalize">
-                            {runStatus.replace(/_/g, ' ')}...
-                          </p>
-                          <div className="w-24 h-1 bg-zinc-200 dark:bg-zinc-800 rounded-full overflow-hidden">
-                             <div className="h-full bg-emerald-500 animate-progress" />
-                          </div>
-                        </div>
-                      )}
-                    </div>
-                  </div>
-                )}
-              </div>
-            </div>
-          </div>
-
-          {/* Download Component */}
-          {status === BuildStatus.SUCCESS && artifactUrl && (
-            <div className="w-[340px] animate-in slide-in-from-bottom-8 fade-in duration-500">
-              <button
-                onClick={handleDownload}
-                disabled={isDownloading}
-                className="flex w-full items-center justify-center gap-3 bg-zinc-900 text-white dark:bg-white dark:text-black py-5 rounded-2xl font-bold transition-all hover:scale-[1.02] active:scale-[0.98] shadow-2xl disabled:opacity-50"
-              >
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" className={isDownloading ? "" : "animate-bounce"}><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 01-2-2v4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
-                {isDownloading ? "Downloading..." : "Install Production Build"}
-              </button>
-              <p className="mt-4 text-[10px] text-zinc-400 font-bold uppercase tracking-[0.2em] text-center">Certified & Signed APK</p>
-            </div>
-          )}
-        </section>
-      </div>
-    </div>
-  );
-};
