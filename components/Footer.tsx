@@ -2,7 +2,7 @@ import React from 'react';
 
 export const Footer: React.FC = () => {
   return (
-    <footer className="relative w-full overflow-hidden bg-[#050505] pt-20 pb-10 font-sans selection:bg-orange-500/30">
+    <footer className="relative w-full overflow-hidden bg-[#050505] pt-20 pb-10 font-sans selection:bg-orange-500/30 transition-all duration-300 hover:bg-zinc-900">
       {/* Tectonic Plate Layering - Background Elements */}
       <div className="absolute inset-0 z-0">
         <div className="absolute top-0 left-0 h-px w-full bg-gradient-to-r from-transparent via-zinc-700 to-transparent opacity-50" />
@@ -82,7 +82,7 @@ export const Footer: React.FC = () => {
                   className="group/next relative"
                 >
                   <img
-                    src="https://apk.jessejesse.com/next.svgt"
+                    src="https://apk.jessejesse.com/next.svg"
                     alt="Next.js"
                     width={80}
                     className="invert opacity-30 grayscale transition-all duration-500 group-hover/next:opacity-100 group-hover/next:grayscale-0"
