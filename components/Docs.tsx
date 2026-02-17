@@ -19,7 +19,15 @@ export const Docs: React.FC<DocsProps> = ({ setView }) => {
   -H "Authorization: token $GITHUB_TOKEN" \\
   -H "Accept: application/vnd.github.v3+json" \\
   https://api.github.com/repos/sudo-self/apk-builder-actions/dispatches \\
-  -d '{\n    "event_type": "apk_build",\n    "client_payload": {\n      "buildId": "cli-trigger-123",\n      "name": "YourAppName",\n      "launchUrl": "https://your-app-url.com",\n      "themeColor": "#2196F3",\n      "iconChoice": "phone"\n    }\n  }'`;
+  -d '{\n    "event_type": "apk_build",\n    "client_payload": {\n      "buildConfig": {\n        "buildId": "cli-trigger-123",\n        "name": "YourAppName",\n        "launchUrl": "https://your-app-url.com",\n        "themeColor": "#2196F3",\n        "iconChoice": "phone"\n      }\n    }\n  }'\
+
+# --- Another Example with more options ---
+
+curl -X POST \\
+  -H "Authorization: token $GITHUB_TOKEN" \\
+  -H "Accept: application/vnd.github.v3+json" \\
+  https://api.github.com/repos/sudo-self/apk-builder-actions/dispatches \\
+  -d '{\n    "event_type": "apk_build",\n    "client_payload": {\n      "buildConfig": {\n        "buildId": "blog-$(date +%s)",\n        "hostName": "com.blog.reader",\n        "name": "Blog Reader Pro",\n        "launchUrl": "https://blog.example.com",\n        "launcherName": "Blogs",\n        "themeColor": "#4A90E2",\n        "themeColorDark": "#357ABD",\n        "backgroundColor": "#F8F9FA",\n        "iconChoice": "phone",\n        "iconUrl": "https://apk.jessejesse.com/phone-512.png",\n        "publishRelease": false\n      }\n    }\n  }'`;
 
   return (
     <div className="min-h-screen bg-[#050505] text-zinc-300 font-sans selection:bg-emerald-500/30 selection:text-emerald-400">
@@ -67,11 +75,11 @@ export const Docs: React.FC<DocsProps> = ({ setView }) => {
             className="group flex items-center gap-2 text-xs font-bold tracking-[0.2em] uppercase text-zinc-500 hover:text-emerald-400 transition-all"
           >
             <ArrowLeft size={14} className="group-hover:-translate-x-1 transition-transform" />
-            Back to Dashboard
+            Home
           </button>
           <div className="flex items-center gap-4">
             <div className="h-px w-12 bg-zinc-800" />
-            <span className="text-[10px] font-mono text-zinc-600 transition-colors hover:text-emerald-400">actions/upload-artifact@v4</span>
+            <span className="text-[10px] font-mono text-zinc-600 transition-colors hover:text-emerald-400">Docs</span>
           </div>
         </nav>
 
