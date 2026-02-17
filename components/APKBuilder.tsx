@@ -100,11 +100,11 @@ export const APKBuilder: React.FC<APKBuilderProps> = ({ setView }) => {
               try {
                 const artifactRes = await fetch(`/api/artifacts?runId=${runId}`);
                 const artifactData = await artifactRes.json();
-                
-                // Find the first artifact that is an APK file.
-                const targetArtifact = artifacts.find((art: any) => art.name.endsWith('.apk') || (art.archive_download_url && art.archive_download_url.endsWith('.zip')));
+                const artifacts = artifactData.artifacts || [];
 
-                if (targetArtifact) {
+                // The workflow produces only one artifact. Grab the first one found.
+                if (artifacts.length > 0) {
+                    const targetArtifact = artifacts[0];
                     clearInterval(artifactPollingInterval.current);
                     setStatus(BuildStatus.SUCCESS);
                     setRunStatus("completed");
