@@ -18,15 +18,7 @@ export const APKBuilder: React.FC<APKBuilderProps> = ({ setView }) => {
   const pollingInterval = useRef<any>(null);
   const artifactPollingInterval = useRef<any>(null);
 
-  const getEnvToken = () => {
-    try {
-      return (window as any).process?.env?.NEXT_PUBLIC_GITHUB_TOKEN || "";
-    } catch {
-      return "";
-    }
-  };
-
-  const GITHUB_TOKEN = getEnvToken();
+  const GITHUB_TOKEN = import.meta.env.VITE_GITHUB_TOKEN || "";
 
   const isValidUrl = url.startsWith("http://") || url.startsWith("https://");
 
