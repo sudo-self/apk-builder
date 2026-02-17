@@ -102,10 +102,21 @@ export const APKBuilder: React.FC<APKBuilderProps> = ({ setView }) => {
                 const artifactData = await artifactRes.json();
                 
                 let targetArtifact = null;
-                if (artifactData.artifacts?.length === 1) {
-                  targetArtifact = artifactData.artifacts[0];
-                } else {
-                  targetArtifact = artifactData.artifacts?.find((art: any) => art.name === `${appName}-app`);
+                const artifacts = artifactData.artifacts || [];
+
+                if (artifacts.length > 0) {
+                  // 1. Try to find an exact match first
+                  targetArtifact = artifacts.find((art: any) => art.name === `${appName}-app`);
+
+                  // 2. If no exact match, try to find a partial match
+                  if (!targetArtifact) {
+                    targetArtifact = artifacts.find((art: any) => art.name.includes(appName));
+                  }
+
+                  // 3. If still no match and there's only one artifact, use that one
+                  if (!targetArtifact && artifacts.length === 1) {
+                    targetArtifact = artifacts[0];
+                  }
                 }
 
                 if (targetArtifact) {
