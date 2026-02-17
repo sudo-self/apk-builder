@@ -1,0 +1,25 @@
+{
+  "functions": {
+    "api/build.ts": {
+      "runtime": "nodejs18.x"
+    },
+    "api/status.ts": {
+      "runtime": "nodejs18.x"
+    },
+    "api/artifacts.ts": {
+      "runtime": "nodejs18.x"
+    },
+    "api/runs.ts": {
+      "runtime": "nodejs18.x"
+    },
+    "api/download.ts": {
+      "runtime": "nodejs18.x"
+    }
+  },
+  "rewrites": [
+    {
+      "source": "/api/(.*)",
+      "destination": "/api"
+    }
+  ]
+}
